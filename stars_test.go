@@ -204,8 +204,22 @@ func TestSlack_ListStars(t *testing.T) {
 				ItemReaction{Name: "clock1", Count: 3, Users: []string{"U1", "U2"}},
 			},
 		}}),
-		NewFileItem(&File{Name: "toy"}),
-		NewFileCommentItem(&File{Name: "toy"}, &Comment{Comment: "cool toy"}),
+		NewFileItem(&File{
+			FileWithoutReactions: &FileWithoutReactions{
+				Name: "toy",
+			},
+			Reactions: []ItemReaction{
+				ItemReaction{Name: "clock1", Count: 3, Users: []string{"U1", "U2"}},
+			},
+		}),
+		NewFileCommentItem(
+			&File{
+				FileWithoutReactions: &FileWithoutReactions{
+					Name: "toy",
+				},
+			},
+			&Comment{Comment: "cool toy"},
+		),
 	}
 	wantStarred := make([]StarredItem, len(want))
 	for i, item := range want {

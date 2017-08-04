@@ -330,13 +330,21 @@ func TestSlack_ListReactions(t *testing.T) {
 			},
 		},
 		ReactedItem{
-			Item: NewFileItem(&File{Name: "toy"}),
+			Item: NewFileItem(&File{
+				FileWithoutReactions: &FileWithoutReactions{
+					Name: "toy",
+				},
+			}),
 			Reactions: []ItemReaction{
 				ItemReaction{Name: "clock1", Count: 3, Users: []string{"U1", "U2"}},
 			},
 		},
 		ReactedItem{
-			Item: NewFileCommentItem(&File{Name: "toy"}, &Comment{Comment: "cool toy"}),
+			Item: NewFileCommentItem(&File{
+				FileWithoutReactions: &FileWithoutReactions{
+					Name: "toy",
+				},
+			}, &Comment{Comment: "cool toy"}),
 			Reactions: []ItemReaction{
 				ItemReaction{Name: "astonished", Count: 3, Users: []string{"U1", "U2", "U3"}},
 			},

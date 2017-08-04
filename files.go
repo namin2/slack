@@ -21,7 +21,7 @@ const (
 )
 
 // File contains all the information for a file
-type File struct {
+type FileWithoutReactions struct {
 	ID        string   `json:"id"`
 	Created   JSONTime `json:"created"`
 	Timestamp JSONTime `json:"timestamp"`
@@ -86,6 +86,12 @@ type File struct {
 	CommentsCount   int      `json:"comments_count"`
 	NumStars        int      `json:"num_stars"`
 	IsStarred       bool     `json:"is_starred"`
+}
+
+// File contains all the information for a file
+type File struct {
+	*FileWithoutReactions
+	Reactions []ItemReaction `json:"reactions"`
 }
 
 // FileUploadParameters contains all the parameters necessary (including the optional ones) for an UploadFile() request.

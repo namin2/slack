@@ -93,7 +93,7 @@ type listReactionsResponseFull struct {
 			*Message
 		} `json:"message"`
 		F struct {
-			*File
+			*FileWithoutReactions
 			Reactions []ItemReaction
 		} `json:"file"`
 		FC struct {
@@ -116,10 +116,10 @@ func (res listReactionsResponseFull) extractReactedItems() []ReactedItem {
 			item.Message = input.M.Message
 			item.Reactions = input.M.Reactions
 		case "file":
-			item.File = input.F.File
+			item.File = &File{FileWithoutReactions: input.F.FileWithoutReactions}
 			item.Reactions = input.F.Reactions
 		case "file_comment":
-			item.File = input.F.File
+			item.File = &File{FileWithoutReactions: input.F.FileWithoutReactions}
 			item.Comment = input.FC.Comment
 			item.Reactions = input.FC.Reactions
 		}
